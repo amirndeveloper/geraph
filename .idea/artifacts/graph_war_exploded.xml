@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="graph:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/graph_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="graph" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.2.8" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.2.8" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.1" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.0" />
+          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.10.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="graph/web/Web" />
+    </root>
+  </artifact>
+</component>

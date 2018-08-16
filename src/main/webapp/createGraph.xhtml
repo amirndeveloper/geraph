@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>پنل ادمین</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="template.xhtml">
+        <ui:define name="content">
+
+            <h:form id="editionToolbarForm">
+                <div >
+                    <p:growl id="messages" showDetail="true" />
+
+                    <p:dialog widgetVar="addNodeDialog" header="Node Details" resizable="false" modal="true" showEffect="fade" hideEffect="fade">
+
+                        <h:form>
+                            <h:panelGrid columns="1">
+                                <h:panelGrid columns="2" cellpadding="5" style="margin-left: 20px">
+
+                                    <h:outputText value="color node: " />
+                                    <p:colorPicker value="#{createMindMapView.nodeData.color}" />
+
+
+                                    <h:outputText value="name: " />
+                                    <h:inputText value="#{createMindMapView.nodeData.name}" />
+
+
+                                    <h:outputText value="desciption: " />
+                                    <p:inputText value="#{createMindMapView.nodeData.description}" />
+
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="1" style="margin-top: 5px ;text-align: center">
+                                    <p:commandButton oncomplete="PF('addNodeDialog').hide();" actionListener="#{createMindMapView.createNode}" value="Add New Node" icon="ui-icon-plusthick"  update="mindMapForm"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                        </h:form>
+                    </p:dialog>
+
+                    <p:dialog widgetVar="removeNodeDialog" header="Remove Node" resizable="false" modal="true" showEffect="fade" hideEffect="fade">
+
+                        <h:form>
+                            <h:panelGrid columns="1">
+
+
+                                <h:panelGrid columns="1" style="margin-top: 5px ;text-align: center">
+                                    <h:outputText value="selected node is deleted ???"/>
+                                    <p:commandButton style="text-align: center" oncomplete="PF('removeNodeDialog').hide();" actionListener="#{createMindMapView.removeNode}" value="Add New Node" icon="ui-icon-plusthick"  update="mindMapForm"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                        </h:form>
+                    </p:dialog>
+
+                    <p:toolbar>
+                            <f:facet name="left">
+
+
+                                <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+                                <p:commandButton update="editionToolbarForm" value="Add Node" actionListener="#{createMindMapView.setMode('add')}"  title="Add Node" icon="ui-icon-plusthick" />
+                                <p:commandButton update="editionToolbarForm" value="Delet Node" actionListener="#{createMindMapView.setMode('remove')}"  title="Delete" icon="ui-icon-trash" />
+
+                                <p:commandButton update="editionToolbarForm" value="Edit Node" actionListener="#{createMindMapView.setMode('edit')}"  title="Delete" icon="ui-icon-refresh" />
+                                <p:commandButton update="editionToolbarForm" value="View" actionListener="#{createMindMapView.setMode('VIEW')}" title="view" icon="ui-icon-info" />
+
+                                <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+                                <h:outputText value="Mode Edition : #{createMindMapView.selectedMode}"/>
+                            </f:facet>
+
+                        </p:toolbar>
+                </div>
+            </h:form>
+
+            <h:form id="mindMapForm">
+                <div >
+                        <p:mindmap  value="#{createMindMapView.root}" style="width: 100%;height: 600px;border: 1px solid black;" >
+                            <p:ajax event="select" listener="#{createMindMapView.onNodeSelect}" />
+                            <p:ajax event="dblselect" listener="#{createMindMapView.onNodeDblselect}" update="output" />
+                        </p:mindmap>
+
+                        <p:dialog widgetVar="details" header="Node Details" resizable="false" modal="true" showEffect="fade" hideEffect="fade">
+                            <h:outputText id="output" value="#{createMindMapView.selectedNode.data}" />
+                        </p:dialog>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
